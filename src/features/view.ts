@@ -1,5 +1,5 @@
-import { App, Modal, requestUrl } from 'obsidian';
-import { getServerOrigin } from '../api/lsky';
+import {App, Modal, requestUrl} from 'obsidian';
+import {getServerOrigin} from '../api/lsky';
 
 export async function collectUsedUploadedImages(app: App, serverUrl: string): Promise<string[]> {
 	const origin = getServerOrigin(serverUrl);

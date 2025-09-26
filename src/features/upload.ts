@@ -1,6 +1,6 @@
-import { App, Notice, TFile } from 'obsidian';
-import { LskyClient } from '../api/lsky';
-import { ProgressModal } from '../ui/progress';
+import {App, Notice, TFile} from 'obsidian';
+import {LskyClient} from '../api/lsky';
+import {ProgressModal} from '../ui/progress';
 
 export class CustomUploader {
 	private app: App;
@@ -69,7 +69,7 @@ export class CustomUploader {
 			.trim();
 		const variants = new Set<string>();
 		variants.add(raw);
-		try { variants.add(decodeURIComponent(raw)); } catch {}
+		try { variants.add(decodeURIComponent(raw)); } catch { /* empty */ }
 		const alternatives: string[] = [];
 		for (const v of variants) {
 			alternatives.push(this.resolveImagePath(v, noteFile));
@@ -91,7 +91,7 @@ export class CustomUploader {
 		try {
 			const decoded = decodeURIComponent(basename);
 			for (const f of files) { if (f.name === decoded) return f; }
-		} catch {}
+		} catch { /* empty */ }
 		return null;
 	}
 
