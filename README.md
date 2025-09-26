@@ -1,94 +1,132 @@
-# Obsidian Sample Plugin
+# Obsidian Lsky Image Bed Manager
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+一个用于管理 Lsky 图床的 Obsidian 插件，提供图片上传、查看、清理和下载等一站式图床管理解决方案。
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+## 功能特性
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+### 🔄 图片上传
+- **多种触发方式**：支持快捷键和侧边栏按钮触发上传
+- **智能命名**：保持原有的命名规则（基于时间戳或哈希）
+- **自动认证**：使用配置的账号信息自动获取和管理 Token
+### 👁️ 图片查看
+- **可视化预览**：直接显示已使用图片的缩略图
+- **精准筛选**：只显示已上传到当前配置图床的图片
+- **侧边栏集成**：可选在侧边栏显示图片管理面板
+### 🧹 智能清理
+- **自动清理**：支持启动时自动执行图片清理
+- **安全比对**：扫描笔记库引用情况，安全删除图床中未被引用的图片
+- **操作日志**：详细的清理记录和确认机制
+### ⬇️ 一键下载
+- **当前笔记下载**：下载当前笔记中的所有图床图片到本地
+- **批量下载**：一键下载整个笔记库的图床图片
+- **智能目录管理**：
+  - 在当前笔记同级创建同名文件夹存放图片
+  - 自动将图床链接替换为本地相对路径
+  - 自动创建不存在的文件夹
+## 配置指南
 
-## First time developing plugins?
+### 基本配置
+在插件设置页面配置以下信息：
+- **图床服务器地址**：您的 Lsky 图床服务地址
+- **用户邮箱**：图床登录邮箱
+- **用户密码**：图床登录密码
+- **其他认证信息**：根据图床要求配置
+- **自动清理**：设置是否在启动时自动执行图片清理
 
-Quick starting guide for new plugin devs:
+![](https://lsky.hzhhzh.com/i/2025/README-1758864154692.png)
+可在功能区设置侧边的组件显示
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+![](https://lsky.hzhhzh.com/i/2025/README-1758864711660.png)
+## 使用指南
 
-## Releasing new releases
+### 上传图片
+1. **方式一**（快捷键）：
+   - 选中图片或光标定位在图片链接上
+   - 使用预设快捷键触发上传
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+2. **方式二**（侧边栏）：
+   - 点击侧边栏中的上传按钮
+   - 选择要上传的图片文件
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+![](https://lsky.hzhhzh.com/i/2025/README-1758864153020.png)
 
-## Adding your plugin to the community plugin list
+![](https://lsky.hzhhzh.com/i/2025/README-1758864267019.png)
+### 查看已使用图片
+1. 点击侧边栏中的"查看图片"按钮
+2. 浏览已上传到图床并被笔记引用的图片列表
+3. 点击图片可查看大图预览
+![](https://lsky.hzhhzh.com/i/2025/README-1758864378821.png)
+### 清理图床图片
+1. **自动清理**：启用后每次启动 Obsidian 自动执行
+2. **手动清理**：在设置页面点击"立即清理"按钮
+3. **查看日志**：在清理日志中查看操作详情
+![](https://lsky.hzhhzh.com/i/2025/README-1758864709376.png)
+![](https://lsky.hzhhzh.com/i/2025/README-1758864710311.png)
+![](https://lsky.hzhhzh.com/i/2025/README-1758864710973.png)
 
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+### 下载图片到本地
+1. **下载当前笔记**：
+   - 打开目标笔记文件
+   - 点击"下载当前笔记图片"按钮
+   - 图片将保存到笔记同级的同名文件夹中
 
-## How to use
+2. **下载所有笔记**：
+   - 在设置页面点击"下载所有图片"按钮
+   - 系统将为每个笔记创建对应的文件夹并下载图片
+![](https://lsky.hzhhzh.com/i/2025/README-1758865106747.png)
+![](https://lsky.hzhhzh.com/i/2025/README-1758865107869.png)
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
 
-## Manually installing the plugin
-
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
-
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint ./src/`
-
-## Funding URL
-
-You can include funding URLs where people who use your plugin can financially support it.
-
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
-
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
+#### 下载前结构
+```
+notes/
+  ├── 学习笔记.md          # 包含图床图片链接
+  └── 工作记录.md          # 包含图床图片链接
 ```
 
-If you have multiple URLs, you can also do:
-
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
+#### 下载后结构
+```
+notes/
+  ├── 学习笔记.md          # 图片链接已替换为本地路径
+  ├── 学习笔记/            # 自动创建的文件夹
+  │   ├── image1.png
+  │   └── image2.jpg
+  ├── 工作记录.md          # 图片链接已替换为本地路径
+  └── 工作记录/            # 自动创建的文件夹
+      ├── photo1.png
+      └── diagram.jpg
 ```
 
-## API Documentation
+## 故障排除
 
-See https://github.com/obsidianmd/obsidian-api
+### 常见问题
+1. **上传失败**：检查图床配置信息和网络连接
+2. **认证错误**：验证邮箱密码是否正确，尝试重新获取 Token
+3. **下载中断**：检查磁盘空间和文件权限设置
+
+### 获取帮助
+- 查看插件日志文件获取详细错误信息
+- 访问项目页面提交 Issue
+- 联系技术支持
+
+## 更新日志
+
+### v1.0.0
+- 初始版本发布
+- 实现基础的上传、查看、清理功能
+- 添加一键下载功能
+
+## 技术支持
+
+如有问题或建议，请通过以下方式联系：
+- GitHub Issues：提交技术问题
+- 邮箱支持：huzhihaonet@foxmail.com 获取使用帮助
+- 文档中心：查看详细使用教程
+
+## 许可证
+
+本项目采用 MIT 许可证，详见 LICENSE 文件。
+
+---
+
+**注意**：使用前请确保您拥有合法的图床使用权限，并遵守相关服务条款。
