@@ -1,8 +1,8 @@
-import { App, Notice, Plugin, PluginSettingTab, Setting, Editor, MarkdownView, Modal } from 'obsidian';
-import { LskyClient } from './src/api/lsky';
-import { CustomUploader } from './src/features/upload';
-import { cleanupUnusedImages } from './src/features/cleanup';
-import { showUsedImages } from './src/features/view';
+import {App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting} from 'obsidian';
+import {LskyClient} from './src/api/lsky';
+import {CustomUploader} from './src/features/upload';
+import {cleanupUnusedImages} from './src/features/cleanup';
+import {showUsedImages} from './src/features/view';
 
 interface LskySettings {
     serverUrl: string;
@@ -134,7 +134,7 @@ export default class LskyPlugin extends Plugin {
                     await this.ensureClient();
                     if (!this.client) return;
                     await cleanupUnusedImages(this.app, this.client, this.settings.serverUrl);
-                } catch {}
+                } catch { /* empty */ }
             }, 500);
         }
     }
@@ -257,6 +257,32 @@ class LskySettingTab extends PluginSettingTab {
                     this.plugin.settings.autoCleanupOnStartup = v;
                     await this.plugin.saveSettings();
                 }));
+
+		// 添加联系作者部分
+		containerEl.createEl('h2', { text: '联系作者' });
+
+		const contactSection = containerEl.createDiv({ cls: 'lsky-contact-section' });
+		contactSection.createEl('p', {
+			text: '如有任何问题、bug提交或功能需求，请联系作者：'
+		});
+		contactSection.createEl('p', {
+			text: '邮箱：huzhihaonet@foxmail.com'
+		});
+
+		// 添加样式
+		const style = containerEl.createEl('style');
+		style.textContent = `
+        .lsky-contact-section {
+            padding: 10px 15px;
+            background-color: var(--background-secondary);
+            border-radius: 6px;
+            margin: 20px 0;
+            border: 1px solid var(--background-modifier-border);
+        }
+        .lsky-contact-section p {
+            margin: 5px 0;
+        }
+    `;
     }
 }
 

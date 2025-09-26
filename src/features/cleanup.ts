@@ -1,6 +1,6 @@
-import { App, Modal, Notice } from 'obsidian';
-import { LskyClient, LskyImageItem, getServerOrigin } from '../api/lsky';
-import { ProgressModal } from '../ui/progress';
+import {App, Modal, Notice} from 'obsidian';
+import {getServerOrigin, LskyClient, LskyImageItem} from '../api/lsky';
+import {ProgressModal} from '../ui/progress';
 
 export async function collectUsedImageUrls(app: App, serverOrigin: string): Promise<string[]> {
 	const files = app.vault.getMarkdownFiles();

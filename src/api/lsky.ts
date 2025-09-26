@@ -1,4 +1,4 @@
-import { App, Notice } from 'obsidian';
+import {App} from 'obsidian';
 
 export interface LskyAuthConfig {
 	serverUrl: string;
@@ -27,7 +27,7 @@ interface LskyListResponse {
 export class LskyClient {
 	private app: App;
 	private config: LskyAuthConfig;
-	private isFetchingToken: boolean = false;
+	private isFetchingToken = false;
 
 	constructor(app: App, config: LskyAuthConfig) {
 		this.app = app;
@@ -61,7 +61,7 @@ export class LskyClient {
 		}
 	}
 
-	private async authorizedFetch(input: string, init: RequestInit = {}, retry401: boolean = true): Promise<Response> {
+	private async authorizedFetch(input: string, init: RequestInit = {}, retry401 = true): Promise<Response> {
 		const headers: Record<string, string> = {
 			'Accept': 'application/json',
 			...(init.headers as Record<string, string> || {})
@@ -83,7 +83,11 @@ export class LskyClient {
 		const res = await this.authorizedFetch(`${this.baseUrl}/upload`, { method: 'POST', body: form });
 		if (!res.ok) {
 			let details = '';
-			try { details = await res.text(); } catch {}
+			try {
+				details = await res.text();
+			} catch (err) {
+				// 忽略解析错误，使用空字符串作为默认值
+			}
 			throw new Error(`HTTP ${res.status}${details ? ` - ${details}` : ''}`);
 		}
 		let json: any;

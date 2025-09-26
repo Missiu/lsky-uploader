@@ -1,6 +1,6 @@
-import { App, Notice, TFile, requestUrl } from 'obsidian';
-import { ProgressModal } from '../ui/progress';
-import { getServerOrigin } from '../api/lsky';
+import {App, Notice, requestUrl, TFile} from 'obsidian';
+import {ProgressModal} from '../ui/progress';
+import {getServerOrigin} from '../api/lsky';
 
 function extractRemoteImageUrls(content: string, origin: string): string[] {
 	const set = new Set<string>();
@@ -15,8 +15,8 @@ function extractRemoteImageUrls(content: string, origin: string): string[] {
 }
 
 function fileNameFromUrl(url: string): string {
-	try { 
-		const u = new URL(url); 
+	try {
+		const u = new URL(url);
 		const name = u.pathname.split('/').pop() || 'image';
 		// Decode URL-encoded characters like %E8%99%9A to Chinese characters
 		return decodeURIComponent(name);
@@ -106,7 +106,7 @@ export async function downloadImagesForAllNotes(app: App, serverUrl: string): Pr
 				}
 				content = replaceUrlWithRelative(content, url, name);
 				total++;
-			} catch {}
+			} catch { /* empty */ }
 		}
 		await app.vault.modify(f, content);
         progress.increment(f.basename);

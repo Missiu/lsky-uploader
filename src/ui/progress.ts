@@ -1,4 +1,4 @@
-import { App, Modal } from 'obsidian';
+import {App, Modal} from 'obsidian';
 
 export class ProgressModal extends Modal {
 	private titleText: string;
