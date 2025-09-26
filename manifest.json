@@ -3,9 +3,9 @@
 	"name": "Lsky Uploader",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "管理兰空图床，包括上传图片、自动清理图床中未使用的链接、一件下载笔记里的在线图片地址并替换未本地等功能",
+	"author": "missiu",
+	"authorUrl": "",
+	"fundingUrl": "https://ko-fi.com/missiunet",
 	"isDesktopOnly": false
 }
