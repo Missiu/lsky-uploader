@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-sample-plugin",
+	"name": "lsky-uploader",
 	"version": "1.0.0",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+	"description": "管理兰空图床，包括上传图片、自动清理图床中未使用的链接、一件下载笔记里的在线图片地址并替换未本地等功能",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",

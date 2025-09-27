@@ -1,5 +1,5 @@
 {
-	"id": "sample-plugin",
+	"id": "lsky-uploader",
 	"name": "Lsky Uploader",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
