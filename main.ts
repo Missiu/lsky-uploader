@@ -269,20 +269,7 @@ class LskySettingTab extends PluginSettingTab {
 			text: '邮箱：huzhihaonet@foxmail.com'
 		});
 
-		// 添加样式
-		const style = containerEl.createEl('style');
-		style.textContent = `
-        .lsky-contact-section {
-            padding: 10px 15px;
-            background-color: var(--background-secondary);
-            border-radius: 6px;
-            margin: 20px 0;
-            border: 1px solid var(--background-modifier-border);
-        }
-        .lsky-contact-section p {
-            margin: 5px 0;
-        }
-    `;
+		// 样式已移至 styles.css
     }
 }
 

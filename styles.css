@@ -6,3 +6,57 @@ available in the app when your plugin is enabled.
 If your plugin does not need CSS, delete this file.
 
 */
+
+/* Contact section */
+.lsky-contact-section {
+    padding: 10px 15px;
+    background-color: var(--background-secondary);
+    border-radius: 6px;
+    margin: 20px 0;
+    border: 1px solid var(--background-modifier-border);
+}
+.lsky-contact-section p {
+    margin: 5px 0;
+}
+
+/* Used images grid */
+.lsky-used-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+}
+
+.lsky-thumb img,
+.lsky-thumb-img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+.lsky-thumb-link {
+    font-size: 10px;
+    word-break: break-all;
+}
+
+/* Preview image inside modal */
+.lsky-preview-img {
+    max-width: 100%;
+    max-height: 70vh;
+}
+
+/* Progress */
+.lsky-progress-wrap {
+    width: 100%;
+    height: 10px;
+    background: var(--background-modifier-border-hover, #eee);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.lsky-progress-bar {
+    height: 100%;
+    width: var(--progress-pct, 0%);
+    background: var(--interactive-accent, #5b8def);
+    transition: width 0.2s;
+}

@@ -33,8 +33,7 @@ export async function showUsedImages(app: App, serverUrl: string): Promise<void>
                 const objectUrl = URL.createObjectURL(blob);
                 const img = contentEl.createEl('img');
                 img.src = objectUrl;
-                img.style.maxWidth = '100%';
-                img.style.maxHeight = '70vh';
+                img.addClass('lsky-preview-img');
             } catch {
                 contentEl.createEl('div', { text: '预览加载失败' });
             }
@@ -49,17 +48,13 @@ export async function showUsedImages(app: App, serverUrl: string): Promise<void>
             contentEl.createEl('h2', { text: '已被使用且已上传至图床的图片' });
             contentEl.createEl('p', { text: `共 ${this.urls.length} 项（仅显示当前配置图床域名）` });
             const grid = contentEl.createDiv({ cls: 'lsky-used-images-grid' });
-            grid.setAttr('style', 'display:grid;grid-template-columns:repeat(auto-fill, minmax(120px,1fr));gap:8px;');
             this.urls.forEach(u => {
                 const card = grid.createDiv({ cls: 'lsky-thumb' });
                 const thumb = card.createEl('img', { attr: { src: u } });
-                thumb.style.width = '100%';
-                thumb.style.height = '100px';
-                thumb.style.objectFit = 'cover';
+                thumb.addClass('lsky-thumb-img');
                 thumb.addEventListener('click', () => new PreviewModal(u).open());
                 const link = card.createEl('div', { text: u });
-                link.style.fontSize = '10px';
-                link.style.wordBreak = 'break-all';
+                link.addClass('lsky-thumb-link');
             });
         }
     }
